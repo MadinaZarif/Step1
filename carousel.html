@@ -6,102 +6,160 @@
 <title>Carousel</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#111;display:flex;justify-content:center;align-items:center;min-height:100vh;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;user-select:none}
-.wrapper{position:relative;width:540px;height:540px}
-@media(min-width:1200px){.wrapper{width:1080px;height:1080px}}
-.slides{width:100%;height:100%;overflow:hidden;position:relative;border-radius:4px}
-.slide{position:absolute;width:100%;height:100%;background:#0a0a0a;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:8%;opacity:0;transform:translateX(100%);transition:transform .45s cubic-bezier(.77,0,.18,1),opacity .45s ease;text-align:center;overflow:hidden}
+body{background:#000;display:flex;justify-content:center;align-items:center;min-height:100vh;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;user-select:none}
+.wrapper{position:relative;width:min(100vw,100vh);max-width:1080px;max-height:1080px;aspect-ratio:1/1}
+.slides{width:100%;height:100%;overflow:hidden;position:relative}
+.slide{
+  position:absolute;width:100%;height:100%;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  padding:8%;text-align:center;overflow:hidden;
+  opacity:0;transform:translateX(100%);
+  transition:transform .48s cubic-bezier(.77,0,.18,1),opacity .48s ease
+}
 .slide.active{opacity:1;transform:translateX(0)}
 .slide.prev{opacity:0;transform:translateX(-100%)}
-.accent{position:absolute;top:0;left:0;right:0;height:5px}
-.slide-num{position:absolute;top:5%;right:6%;font-size:clamp(14px,1.8vw,28px);color:rgba(255,255,255,.18);font-weight:300;letter-spacing:2px}
-.deco{position:absolute;top:4%;left:5%;font-size:clamp(80px,15vw,220px);color:rgba(255,255,255,.03);font-family:Georgia,serif;line-height:1;pointer-events:none}
-.emoji{font-size:clamp(48px,9vw,110px);margin-bottom:4%}
-.label{font-size:clamp(18px,2.8vw,42px);color:rgba(255,255,255,.45);font-weight:300;margin-bottom:2%;letter-spacing:.5px}
-.headline{font-size:clamp(26px,4.5vw,66px);color:#fff;font-weight:800;line-height:1.25;max-width:90%}
-.body{font-size:clamp(20px,3.2vw,48px);color:rgba(255,255,255,.82);font-weight:400;line-height:1.55;max-width:88%;margin-top:3%}
-.punch{font-size:clamp(30px,5.5vw,80px);font-weight:900;line-height:1.2;margin-top:2%}
-.muted{font-size:clamp(14px,2vw,30px);color:rgba(255,255,255,.3);margin-top:5%}
-.gold{color:#ffd700}
-.red{color:#ff6b6b}
-.green{color:#5dffa8}
-.purple{color:#c06bff}
-.nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.08);border:none;color:#fff;width:clamp(36px,5vw,68px);height:clamp(36px,5vw,68px);border-radius:50%;font-size:clamp(16px,2.5vw,28px);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;z-index:9}
-.nav:hover{background:rgba(255,255,255,.22)}
-.prev-btn{left:clamp(-50px,-5.5vw,-38px)}
-.next-btn{right:clamp(-50px,-5.5vw,-38px)}
-.dots{position:absolute;bottom:-36px;left:50%;transform:translateX(-50%);display:flex;gap:8px}
-.dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.25);cursor:pointer;transition:all .2s}
-.dot.active{background:#fff;transform:scale(1.3)}
+
+/* photo background */
+.bg{
+  position:absolute;inset:0;background-size:cover;background-position:center;
+  transition:transform 6s ease;
+}
+.slide.active .bg{transform:scale(1.04)}
+
+/* overlay: dark gradient so text is always readable */
+.overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(160deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,.72) 100%)
+}
+
+/* slide-specific overlay tints */
+.slide:nth-child(1) .overlay{background:linear-gradient(160deg,rgba(180,40,80,.35),rgba(0,0,0,.7))}
+.slide:nth-child(2) .overlay{background:linear-gradient(160deg,rgba(0,0,0,.45),rgba(10,30,60,.75))}
+.slide:nth-child(3) .overlay{background:linear-gradient(160deg,rgba(0,0,0,.55),rgba(30,10,10,.75))}
+.slide:nth-child(4) .overlay{background:linear-gradient(160deg,rgba(180,40,80,.3),rgba(0,0,0,.68))}
+.slide:nth-child(5) .overlay{background:linear-gradient(160deg,rgba(0,0,0,.45),rgba(0,40,20,.7))}
+.slide:nth-child(6) .overlay{background:linear-gradient(160deg,rgba(0,0,0,.5),rgba(20,20,60,.72))}
+.slide:nth-child(7) .overlay{background:linear-gradient(160deg,rgba(0,0,0,.6),rgba(0,0,0,.8))}
+
+/* content sits above bg+overlay */
+.content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:clamp(8px,1.8vw,22px)}
+
+.num{position:absolute;top:5%;right:5%;z-index:3;font-size:clamp(12px,1.6vw,24px);color:rgba(255,255,255,.35);letter-spacing:2px;font-weight:300}
+.tag{position:absolute;bottom:6%;left:50%;transform:translateX(-50%);z-index:3;font-size:clamp(10px,1.3vw,18px);color:rgba(255,255,255,.3);letter-spacing:3px;text-transform:uppercase}
+
+.label{font-size:clamp(15px,2.2vw,34px);color:rgba(255,255,255,.55);font-weight:300;letter-spacing:.5px}
+.headline{font-size:clamp(28px,5vw,72px);color:#fff;font-weight:900;line-height:1.2;max-width:88%;text-shadow:0 2px 24px rgba(0,0,0,.6)}
+.body{font-size:clamp(18px,2.8vw,44px);color:rgba(255,255,255,.9);font-weight:400;line-height:1.6;max-width:88%;text-shadow:0 2px 16px rgba(0,0,0,.5)}
+.punch{font-size:clamp(26px,4.8vw,70px);font-weight:900;line-height:1.2;color:#ffd700;text-shadow:0 0 40px rgba(255,215,0,.4)}
+.sub{font-size:clamp(12px,1.8vw,26px);color:rgba(255,255,255,.35);letter-spacing:1px}
+.gold{color:#ffd700;text-shadow:0 0 20px rgba(255,215,0,.3)}
+.pink{color:#ffb3d1}
+.red{color:#ff7a7a}
+.green{color:#7dffb3}
+
+/* nav */
+.nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.12);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.15);color:#fff;width:clamp(34px,4.5vw,60px);height:clamp(34px,4.5vw,60px);border-radius:50%;font-size:clamp(14px,2vw,24px);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;z-index:10}
+.nav:hover{background:rgba(255,255,255,.28)}
+.prev-btn{left:clamp(-46px,-5vw,-30px)}
+.next-btn{right:clamp(-46px,-5vw,-30px)}
+
+/* dots */
+.dots{position:absolute;bottom:-32px;left:50%;transform:translateX(-50%);display:flex;gap:7px;z-index:10}
+.dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.3);cursor:pointer;transition:all .2s}
+.dot.active{background:#fff;transform:scale(1.35)}
 </style>
 </head>
 <body>
 <div class="wrapper">
   <div class="slides" id="slides">
 
-    <!-- 1 -->
+    <!-- 1: flowers -->
     <div class="slide active">
-      <div class="accent" style="background:#ff6b35"></div>
-      <div class="slide-num">01 / 07</div>
-      <div class="deco">"</div>
-      <div class="label">Бир савол:</div>
-      <div class="headline">Сиз кимсиз?</div>
-      <div class="body" style="font-size:clamp(28px,5vw,72px);font-weight:700;margin-top:4%">Менми?</div>
+      <div class="bg" style="background-image:url('img1.jpg')"></div>
+      <div class="overlay"></div>
+      <div class="num">01 / 07</div>
+      <div class="tag">@username</div>
+      <div class="content">
+        <div class="label">Бир савол:</div>
+        <div class="headline">Сиз кимсиз?</div>
+        <div class="headline" style="font-size:clamp(36px,6.5vw,90px)">Менми?</div>
+      </div>
     </div>
 
-    <!-- 2 -->
+    <!-- 2: bridge / Strasbourg -->
     <div class="slide">
-      <div class="accent" style="background:#f7c59f"></div>
-      <div class="slide-num">02 / 07</div>
-      <div class="emoji">🦅</div>
-      <div class="body">Қуш бу дунёга ўчгани келганига амин бўлганидек...</div>
-      <div class="headline" style="margin-top:3%">мен ҳам бу дунёга <span class="gold">бахтли, бой ва таниқли</span> бўлиш учун келганимга аминман.</div>
+      <div class="bg" style="background-image:url('img4.jpg')"></div>
+      <div class="overlay"></div>
+      <div class="num">02 / 07</div>
+      <div class="tag">@username</div>
+      <div class="content">
+        <div class="label">🦅 Мен аминман —</div>
+        <div class="body">Қуш бу дунёга ўчгани келганига амин бўлганидек...</div>
+        <div class="headline" style="font-size:clamp(22px,3.6vw,54px)">мен ҳам бу дунёга <span class="gold">бахтли, бой ва таниқли</span> бўлиш учун келганимга аминман.</div>
+      </div>
     </div>
 
-    <!-- 3 -->
+    <!-- 3: field / reality check -->
     <div class="slide">
-      <div class="accent" style="background:#5b8fff"></div>
-      <div class="slide-num">03 / 07</div>
-      <div class="emoji">🐧</div>
-      <div class="body">Фақат барча қушлар ҳам ўча олмаганидек —</div>
-      <div class="headline red" style="margin-top:3%">мен ҳам бой ёки таниқли бўлмадим.</div>
+      <div class="bg" style="background-image:url('img3.jpg')"></div>
+      <div class="overlay"></div>
+      <div class="num">03 / 07</div>
+      <div class="tag">@username</div>
+      <div class="content">
+        <div class="label">🐧 Аммо...</div>
+        <div class="body">Фақат барча қушлар ҳам ўча олмаганидек —</div>
+        <div class="headline red">мен ҳам бой ёки таниқли бўлмадим.</div>
+      </div>
     </div>
 
-    <!-- 4 -->
+    <!-- 4: flowers again -->
     <div class="slide">
-      <div class="accent" style="background:#ff6b6b"></div>
-      <div class="slide-num">04 / 07</div>
-      <div class="emoji">🥗</div>
-      <div class="label">Мен — <span class="gold">албатта</span></div>
-      <div class="headline">эртага тўғри овқатланиб бошлашимга ишонаман.</div>
+      <div class="bg" style="background-image:url('img1.jpg');background-position:bottom center"></div>
+      <div class="overlay"></div>
+      <div class="num">04 / 07</div>
+      <div class="tag">@username</div>
+      <div class="content">
+        <div class="label">🥗 Мен — <span class="gold">албатта</span></div>
+        <div class="headline" style="font-size:clamp(22px,3.8vw,56px)">эртага тўғри овқатланиб бошлашимга ишонаман.</div>
+      </div>
     </div>
 
-    <!-- 5 -->
+    <!-- 5: road / shadows — walking = sports -->
     <div class="slide">
-      <div class="accent" style="background:#5dffa8"></div>
-      <div class="slide-num">05 / 07</div>
-      <div class="emoji">🏃</div>
-      <div class="body">Шунингдек ҳар куни спорт бошлаб юбориш ҳам</div>
-      <div class="headline green" style="margin-top:3%">мен учун қийин эмас.</div>
+      <div class="bg" style="background-image:url('img2.jpg')"></div>
+      <div class="overlay"></div>
+      <div class="num">05 / 07</div>
+      <div class="tag">@username</div>
+      <div class="content">
+        <div class="label">🏃 Спорт ҳам</div>
+        <div class="body">Шунингдек ҳар куни спорт бошлаб юбориш ҳам</div>
+        <div class="headline green">мен учун қийин эмас.</div>
+      </div>
     </div>
 
-    <!-- 6 -->
+    <!-- 6: street / gate — learning, exploring -->
     <div class="slide">
-      <div class="accent" style="background:#c06bff"></div>
-      <div class="slide-num">06 / 07</div>
-      <div class="emoji">📚</div>
-      <div class="body">Ҳамда</div>
-      <div class="headline purple" style="margin-top:2%">истаган нарсамни ўргана олишим ҳам мумкин.</div>
+      <div class="bg" style="background-image:url('img5.jpg')"></div>
+      <div class="overlay"></div>
+      <div class="num">06 / 07</div>
+      <div class="tag">@username</div>
+      <div class="content">
+        <div class="label">📚 Ҳамда</div>
+        <div class="headline" style="color:#d4b3ff;font-size:clamp(22px,4vw,58px)">истаган нарсамни ўргана олишим ҳам мумкин.</div>
+      </div>
     </div>
 
-    <!-- 7 — punchline -->
+    <!-- 7: bridge — punchline -->
     <div class="slide">
-      <div class="accent" style="background:#ffd700"></div>
-      <div class="slide-num">07 / 07</div>
-      <div class="deco">"</div>
-      <div class="body">Мен ўзимга ишонаман ва...</div>
-      <div class="punch gold">эртага бошлайман. 😴</div>
-      <div class="muted">Ҳар куни. Эртага. Доим эртага.</div>
+      <div class="bg" style="background-image:url('img4.jpg');background-position:bottom"></div>
+      <div class="overlay" style="background:linear-gradient(160deg,rgba(0,0,0,.65),rgba(0,0,0,.85))"></div>
+      <div class="num">07 / 07</div>
+      <div class="tag">@username</div>
+      <div class="content">
+        <div class="body" style="color:rgba(255,255,255,.6)">Мен ўзимга ишонаман ва …</div>
+        <div class="punch">эртага бошлайман. 😴</div>
+        <div class="sub" style="margin-top:4%">Ҳар куни. Эртага. Доим эртага.</div>
+      </div>
     </div>
 
   </div>
@@ -126,8 +184,8 @@ slides.forEach((_, i) => {
 function goTo(n) {
   slides[cur].classList.remove('active');
   slides[cur].classList.add('prev');
-  const prev = cur;
-  setTimeout(() => slides[prev].classList.remove('prev'), 460);
+  const old = cur;
+  setTimeout(() => slides[old].classList.remove('prev'), 500);
   cur = (n + slides.length) % slides.length;
   slides[cur].classList.add('active');
   document.querySelectorAll('.dot').forEach((d, i) =>
