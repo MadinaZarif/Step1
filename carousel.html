@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carousel</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#111;display:flex;justify-content:center;align-items:center;min-height:100vh;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;user-select:none}
+.wrapper{position:relative;width:540px;height:540px}
+@media(min-width:1200px){.wrapper{width:1080px;height:1080px}}
+.slides{width:100%;height:100%;overflow:hidden;position:relative;border-radius:4px}
+.slide{position:absolute;width:100%;height:100%;background:#0a0a0a;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:8%;opacity:0;transform:translateX(100%);transition:transform .45s cubic-bezier(.77,0,.18,1),opacity .45s ease;text-align:center;overflow:hidden}
+.slide.active{opacity:1;transform:translateX(0)}
+.slide.prev{opacity:0;transform:translateX(-100%)}
+.accent{position:absolute;top:0;left:0;right:0;height:5px}
+.slide-num{position:absolute;top:5%;right:6%;font-size:clamp(14px,1.8vw,28px);color:rgba(255,255,255,.18);font-weight:300;letter-spacing:2px}
+.deco{position:absolute;top:4%;left:5%;font-size:clamp(80px,15vw,220px);color:rgba(255,255,255,.03);font-family:Georgia,serif;line-height:1;pointer-events:none}
+.emoji{font-size:clamp(48px,9vw,110px);margin-bottom:4%}
+.label{font-size:clamp(18px,2.8vw,42px);color:rgba(255,255,255,.45);font-weight:300;margin-bottom:2%;letter-spacing:.5px}
+.headline{font-size:clamp(26px,4.5vw,66px);color:#fff;font-weight:800;line-height:1.25;max-width:90%}
+.body{font-size:clamp(20px,3.2vw,48px);color:rgba(255,255,255,.82);font-weight:400;line-height:1.55;max-width:88%;margin-top:3%}
+.punch{font-size:clamp(30px,5.5vw,80px);font-weight:900;line-height:1.2;margin-top:2%}
+.muted{font-size:clamp(14px,2vw,30px);color:rgba(255,255,255,.3);margin-top:5%}
+.gold{color:#ffd700}
+.red{color:#ff6b6b}
+.green{color:#5dffa8}
+.purple{color:#c06bff}
+.nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.08);border:none;color:#fff;width:clamp(36px,5vw,68px);height:clamp(36px,5vw,68px);border-radius:50%;font-size:clamp(16px,2.5vw,28px);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;z-index:9}
+.nav:hover{background:rgba(255,255,255,.22)}
+.prev-btn{left:clamp(-50px,-5.5vw,-38px)}
+.next-btn{right:clamp(-50px,-5.5vw,-38px)}
+.dots{position:absolute;bottom:-36px;left:50%;transform:translateX(-50%);display:flex;gap:8px}
+.dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.25);cursor:pointer;transition:all .2s}
+.dot.active{background:#fff;transform:scale(1.3)}
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="slides" id="slides">
+
+    <!-- 1 -->
+    <div class="slide active">
+      <div class="accent" style="background:#ff6b35"></div>
+      <div class="slide-num">01 / 07</div>
+      <div class="deco">"</div>
+      <div class="label">Бир савол:</div>
+      <div class="headline">Сиз кимсиз?</div>
+      <div class="body" style="font-size:clamp(28px,5vw,72px);font-weight:700;margin-top:4%">Менми?</div>
+    </div>
+
+    <!-- 2 -->
+    <div class="slide">
+      <div class="accent" style="background:#f7c59f"></div>
+      <div class="slide-num">02 / 07</div>
+      <div class="emoji">🦅</div>
+      <div class="body">Қуш бу дунёга ўчгани келганига амин бўлганидек...</div>
+      <div class="headline" style="margin-top:3%">мен ҳам бу дунёга <span class="gold">бахтли, бой ва таниқли</span> бўлиш учун келганимга аминман.</div>
+    </div>
+
+    <!-- 3 -->
+    <div class="slide">
+      <div class="accent" style="background:#5b8fff"></div>
+      <div class="slide-num">03 / 07</div>
+      <div class="emoji">🐧</div>
+      <div class="body">Фақат барча қушлар ҳам ўча олмаганидек —</div>
+      <div class="headline red" style="margin-top:3%">мен ҳам бой ёки таниқли бўлмадим.</div>
+    </div>
+
+    <!-- 4 -->
+    <div class="slide">
+      <div class="accent" style="background:#ff6b6b"></div>
+      <div class="slide-num">04 / 07</div>
+      <div class="emoji">🥗</div>
+      <div class="label">Мен — <span class="gold">албатта</span></div>
+      <div class="headline">эртага тўғри овқатланиб бошлашимга ишонаман.</div>
+    </div>
+
+    <!-- 5 -->
+    <div class="slide">
+      <div class="accent" style="background:#5dffa8"></div>
+      <div class="slide-num">05 / 07</div>
+      <div class="emoji">🏃</div>
+      <div class="body">Шунингдек ҳар куни спорт бошлаб юбориш ҳам</div>
+      <div class="headline green" style="margin-top:3%">мен учун қийин эмас.</div>
+    </div>
+
+    <!-- 6 -->
+    <div class="slide">
+      <div class="accent" style="background:#c06bff"></div>
+      <div class="slide-num">06 / 07</div>
+      <div class="emoji">📚</div>
+      <div class="body">Ҳамда</div>
+      <div class="headline purple" style="margin-top:2%">истаган нарсамни ўргана олишим ҳам мумкин.</div>
+    </div>
+
+    <!-- 7 — punchline -->
+    <div class="slide">
+      <div class="accent" style="background:#ffd700"></div>
+      <div class="slide-num">07 / 07</div>
+      <div class="deco">"</div>
+      <div class="body">Мен ўзимга ишонаман ва...</div>
+      <div class="punch gold">эртага бошлайман. 😴</div>
+      <div class="muted">Ҳар куни. Эртага. Доим эртага.</div>
+    </div>
+
+  </div>
+
+  <button class="nav prev-btn" onclick="go(-1)">&#8592;</button>
+  <button class="nav next-btn" onclick="go(1)">&#8594;</button>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+let cur = 0;
+const slides = document.querySelectorAll('.slide');
+const dotsEl = document.getElementById('dots');
+
+slides.forEach((_, i) => {
+  const d = document.createElement('div');
+  d.className = 'dot' + (i === 0 ? ' active' : '');
+  d.onclick = () => goTo(i);
+  dotsEl.appendChild(d);
+});
+
+function goTo(n) {
+  slides[cur].classList.remove('active');
+  slides[cur].classList.add('prev');
+  const prev = cur;
+  setTimeout(() => slides[prev].classList.remove('prev'), 460);
+  cur = (n + slides.length) % slides.length;
+  slides[cur].classList.add('active');
+  document.querySelectorAll('.dot').forEach((d, i) =>
+    d.className = 'dot' + (i === cur ? ' active' : ''));
+}
+
+function go(d) { goTo(cur + d); }
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft') go(-1);
+  if (e.key === 'ArrowRight') go(1);
+});
+
+let sx = 0;
+const w = document.querySelector('.wrapper');
+w.addEventListener('touchstart', e => sx = e.touches[0].clientX, {passive:true});
+w.addEventListener('touchend', e => {
+  const dx = sx - e.changedTouches[0].clientX;
+  if (Math.abs(dx) > 40) go(dx > 0 ? 1 : -1);
+});
+</script>
+</body>
+</html>
