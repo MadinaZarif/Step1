@@ -3,170 +3,306 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Carousel</title>
+<title>@madina.zarif</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#000;display:flex;justify-content:center;align-items:center;min-height:100vh;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;user-select:none}
-.wrapper{position:relative;width:min(100vw,100vh);max-width:1080px;max-height:1080px;aspect-ratio:1/1}
+body{
+  background:#d6cdc4;
+  display:flex;justify-content:center;align-items:center;
+  min-height:100vh;
+  font-family:Georgia,'Times New Roman',serif;
+  user-select:none;
+}
+
+.wrapper{position:relative;width:min(96vw,96vh);max-width:1080px;aspect-ratio:1/1}
 .slides{width:100%;height:100%;overflow:hidden;position:relative}
+
 .slide{
-  position:absolute;width:100%;height:100%;
+  position:absolute;inset:0;background:#fdf9f4;
   display:flex;flex-direction:column;justify-content:center;align-items:center;
-  padding:8%;text-align:center;overflow:hidden;
+  padding:9% 10%;
   opacity:0;transform:translateX(100%);
-  transition:transform .48s cubic-bezier(.77,0,.18,1),opacity .48s ease
+  transition:transform .5s cubic-bezier(.77,0,.18,1),opacity .5s ease;
+  text-align:center;overflow:hidden;
 }
 .slide.active{opacity:1;transform:translateX(0)}
 .slide.prev{opacity:0;transform:translateX(-100%)}
 
-/* photo background */
-.bg{
-  position:absolute;inset:0;background-size:cover;background-position:center;
-  transition:transform 6s ease;
+.bar{position:absolute;top:0;left:0;right:0;height:clamp(3px,0.35vw,5px)}
+
+.deco{
+  position:absolute;font-family:Georgia,serif;
+  font-size:clamp(120px,22vw,300px);line-height:1;
+  pointer-events:none;color:rgba(30,21,16,.04);
 }
-.slide.active .bg{transform:scale(1.04)}
+.tl{top:-3%;left:1%}
+.br{bottom:-10%;right:2%;transform:rotate(180deg)}
 
-/* overlay: dark gradient so text is always readable */
-.overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(160deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,.72) 100%)
+.meta{position:absolute;font-family:system-ui,sans-serif;font-weight:300;
+  font-size:clamp(9px,1.1vw,15px);letter-spacing:.8px;color:rgba(30,21,16,.28)}
+.meta-tl{top:5%;left:6%}
+.meta-tr{top:5%;right:6%}
+.meta-bl{bottom:5%;left:6%}
+.meta-br{bottom:5%;right:6%}
+
+.content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;
+  gap:clamp(8px,1.6vw,22px);max-width:86%}
+
+.eyebrow{font-family:system-ui,sans-serif;font-weight:400;
+  font-size:clamp(9px,1.2vw,17px);letter-spacing:3px;text-transform:uppercase;opacity:.45}
+.rule{height:1px;width:clamp(22px,3.5vw,48px);background:currentColor;opacity:.35}
+.h1{font-size:clamp(28px,4.8vw,70px);font-weight:400;line-height:1.25;color:#1e1510}
+.h2{font-size:clamp(22px,3.5vw,52px);font-weight:400;line-height:1.35;color:#1e1510}
+.body{font-size:clamp(16px,2.3vw,34px);font-weight:400;line-height:1.75;
+  color:#2a1f14;opacity:.78;font-family:Georgia,serif}
+.italic{font-style:italic}
+.quote{
+  font-style:italic;font-size:clamp(17px,2.6vw,38px);line-height:1.6;
+  border-left:clamp(2px,0.3vw,3px) solid currentColor;
+  padding-left:clamp(12px,1.8vw,24px);text-align:left;
+  color:#1e1510;max-width:88%;
 }
-
-/* slide-specific overlay tints */
-.slide:nth-child(1) .overlay{background:linear-gradient(160deg,rgba(180,40,80,.35),rgba(0,0,0,.7))}
-.slide:nth-child(2) .overlay{background:linear-gradient(160deg,rgba(0,0,0,.45),rgba(10,30,60,.75))}
-.slide:nth-child(3) .overlay{background:linear-gradient(160deg,rgba(0,0,0,.55),rgba(30,10,10,.75))}
-.slide:nth-child(4) .overlay{background:linear-gradient(160deg,rgba(180,40,80,.3),rgba(0,0,0,.68))}
-.slide:nth-child(5) .overlay{background:linear-gradient(160deg,rgba(0,0,0,.45),rgba(0,40,20,.7))}
-.slide:nth-child(6) .overlay{background:linear-gradient(160deg,rgba(0,0,0,.5),rgba(20,20,60,.72))}
-.slide:nth-child(7) .overlay{background:linear-gradient(160deg,rgba(0,0,0,.6),rgba(0,0,0,.8))}
-
-/* content sits above bg+overlay */
-.content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:clamp(8px,1.8vw,22px)}
-
-.num{position:absolute;top:5%;right:5%;z-index:3;font-size:clamp(12px,1.6vw,24px);color:rgba(255,255,255,.35);letter-spacing:2px;font-weight:300}
-.tag{position:absolute;bottom:6%;left:50%;transform:translateX(-50%);z-index:3;font-size:clamp(10px,1.3vw,18px);color:rgba(255,255,255,.3);letter-spacing:3px;text-transform:uppercase}
-
-.label{font-size:clamp(15px,2.2vw,34px);color:rgba(255,255,255,.55);font-weight:300;letter-spacing:.5px}
-.headline{font-size:clamp(28px,5vw,72px);color:#fff;font-weight:900;line-height:1.2;max-width:88%;text-shadow:0 2px 24px rgba(0,0,0,.6)}
-.body{font-size:clamp(18px,2.8vw,44px);color:rgba(255,255,255,.9);font-weight:400;line-height:1.6;max-width:88%;text-shadow:0 2px 16px rgba(0,0,0,.5)}
-.punch{font-size:clamp(26px,4.8vw,70px);font-weight:900;line-height:1.2;color:#ffd700;text-shadow:0 0 40px rgba(255,215,0,.4)}
-.sub{font-size:clamp(12px,1.8vw,26px);color:rgba(255,255,255,.35);letter-spacing:1px}
-.gold{color:#ffd700;text-shadow:0 0 20px rgba(255,215,0,.3)}
-.pink{color:#ffb3d1}
-.red{color:#ff7a7a}
-.green{color:#7dffb3}
+.caption{font-family:system-ui,sans-serif;font-weight:300;font-style:italic;
+  font-size:clamp(11px,1.5vw,21px);opacity:.45;letter-spacing:.3px}
+.accent{/* color set inline */}
 
 /* nav */
-.nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.12);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.15);color:#fff;width:clamp(34px,4.5vw,60px);height:clamp(34px,4.5vw,60px);border-radius:50%;font-size:clamp(14px,2vw,24px);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;z-index:10}
-.nav:hover{background:rgba(255,255,255,.28)}
-.prev-btn{left:clamp(-46px,-5vw,-30px)}
-.next-btn{right:clamp(-46px,-5vw,-30px)}
+.nav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  background:rgba(30,21,16,.07);border:1px solid rgba(30,21,16,.1);
+  color:#1e1510;border-radius:50%;cursor:pointer;
+  width:clamp(30px,3.8vw,54px);height:clamp(30px,3.8vw,54px);
+  font-size:clamp(12px,1.8vw,22px);
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s;z-index:10;
+}
+.nav:hover{background:rgba(30,21,16,.15)}
+.prev-btn{left:clamp(-42px,-4.5vw,-26px)}
+.next-btn{right:clamp(-42px,-4.5vw,-26px)}
 
-/* dots */
-.dots{position:absolute;bottom:-32px;left:50%;transform:translateX(-50%);display:flex;gap:7px;z-index:10}
-.dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.3);cursor:pointer;transition:all .2s}
-.dot.active{background:#fff;transform:scale(1.35)}
+.dots{position:absolute;bottom:-28px;left:50%;transform:translateX(-50%);
+  display:flex;gap:6px;z-index:10}
+.dot{width:6px;height:6px;border-radius:50%;background:rgba(30,21,16,.2);
+  cursor:pointer;transition:all .2s}
+.dot.active{background:#1e1510;transform:scale(1.45)}
 </style>
 </head>
 <body>
 <div class="wrapper">
-  <div class="slides" id="slides">
+ <div class="slides" id="slides">
 
-    <!-- 1: flowers -->
-    <div class="slide active">
-      <div class="bg" style="background-image:url('img1.jpg')"></div>
-      <div class="overlay"></div>
-      <div class="num">01 / 07</div>
-      <div class="tag">@username</div>
-      <div class="content">
-        <div class="label">Бир савол:</div>
-        <div class="headline">Сиз кимсиз?</div>
-        <div class="headline" style="font-size:clamp(36px,6.5vw,90px)">Менми?</div>
-      </div>
-    </div>
-
-    <!-- 2: bridge / Strasbourg -->
-    <div class="slide">
-      <div class="bg" style="background-image:url('img4.jpg')"></div>
-      <div class="overlay"></div>
-      <div class="num">02 / 07</div>
-      <div class="tag">@username</div>
-      <div class="content">
-        <div class="label">🦅 Мен аминман —</div>
-        <div class="body">Қуш бу дунёга ўчгани келганига амин бўлганидек...</div>
-        <div class="headline" style="font-size:clamp(22px,3.6vw,54px)">мен ҳам бу дунёга <span class="gold">бахтли, бой ва таниқли</span> бўлиш учун келганимга аминман.</div>
-      </div>
-    </div>
-
-    <!-- 3: field / reality check -->
-    <div class="slide">
-      <div class="bg" style="background-image:url('img3.jpg')"></div>
-      <div class="overlay"></div>
-      <div class="num">03 / 07</div>
-      <div class="tag">@username</div>
-      <div class="content">
-        <div class="label">🐧 Аммо...</div>
-        <div class="body">Фақат барча қушлар ҳам ўча олмаганидек —</div>
-        <div class="headline red">мен ҳам бой ёки таниқли бўлмадим.</div>
-      </div>
-    </div>
-
-    <!-- 4: flowers again -->
-    <div class="slide">
-      <div class="bg" style="background-image:url('img1.jpg');background-position:bottom center"></div>
-      <div class="overlay"></div>
-      <div class="num">04 / 07</div>
-      <div class="tag">@username</div>
-      <div class="content">
-        <div class="label">🥗 Мен — <span class="gold">албатта</span></div>
-        <div class="headline" style="font-size:clamp(22px,3.8vw,56px)">эртага тўғри овқатланиб бошлашимга ишонаман.</div>
-      </div>
-    </div>
-
-    <!-- 5: road / shadows — walking = sports -->
-    <div class="slide">
-      <div class="bg" style="background-image:url('img2.jpg')"></div>
-      <div class="overlay"></div>
-      <div class="num">05 / 07</div>
-      <div class="tag">@username</div>
-      <div class="content">
-        <div class="label">🏃 Спорт ҳам</div>
-        <div class="body">Шунингдек ҳар куни спорт бошлаб юбориш ҳам</div>
-        <div class="headline green">мен учун қийин эмас.</div>
-      </div>
-    </div>
-
-    <!-- 6: street / gate — learning, exploring -->
-    <div class="slide">
-      <div class="bg" style="background-image:url('img5.jpg')"></div>
-      <div class="overlay"></div>
-      <div class="num">06 / 07</div>
-      <div class="tag">@username</div>
-      <div class="content">
-        <div class="label">📚 Ҳамда</div>
-        <div class="headline" style="color:#d4b3ff;font-size:clamp(22px,4vw,58px)">истаган нарсамни ўргана олишим ҳам мумкин.</div>
-      </div>
-    </div>
-
-    <!-- 7: bridge — punchline -->
-    <div class="slide">
-      <div class="bg" style="background-image:url('img4.jpg');background-position:bottom"></div>
-      <div class="overlay" style="background:linear-gradient(160deg,rgba(0,0,0,.65),rgba(0,0,0,.85))"></div>
-      <div class="num">07 / 07</div>
-      <div class="tag">@username</div>
-      <div class="content">
-        <div class="body" style="color:rgba(255,255,255,.6)">Мен ўзимга ишонаман ва …</div>
-        <div class="punch">эртага бошлайман. 😴</div>
-        <div class="sub" style="margin-top:4%">Ҳар куни. Эртага. Доим эртага.</div>
-      </div>
-    </div>
-
+  <!-- 01 -->
+  <div class="slide active">
+   <div class="bar" style="background:#b8926a"></div>
+   <div class="deco tl">"</div>
+   <div class="meta meta-tl">hikoya</div>
+   <div class="meta meta-tr">@madina.zarif</div>
+   <div class="meta meta-bl">01 / 12</div>
+   <div class="content" style="color:#b8926a">
+    <div class="eyebrow">Xotira</div>
+    <div class="rule"></div>
+    <div class="h1">13–14 yoshdaman.</div>
+    <div class="h1">Yoz oylari.</div>
+    <div class="body">Qo'shni tumanda yashaydigan holamnikiga otlandim.</div>
+   </div>
   </div>
 
-  <button class="nav prev-btn" onclick="go(-1)">&#8592;</button>
-  <button class="nav next-btn" onclick="go(1)">&#8594;</button>
-  <div class="dots" id="dots"></div>
+  <!-- 02 -->
+  <div class="slide">
+   <div class="bar" style="background:#8a7560"></div>
+   <div class="deco tl">"</div>
+   <div class="meta meta-tl">hikoya</div>
+   <div class="meta meta-tr">@madina.zarif</div>
+   <div class="meta meta-bl">02 / 12</div>
+   <div class="content" style="color:#8a7560">
+    <div class="eyebrow">Bekatta</div>
+    <div class="rule"></div>
+    <div class="h1">Ikki soat o'tdi.</div>
+    <div class="h1">Avtobusdan darak yo'q.</div>
+    <div class="body">Bekatda yana bir yosh ayol ham kutardi. Oxiri u bilan kelishib mashina to'xtatdik.</div>
+   </div>
+  </div>
+
+  <!-- 03 -->
+  <div class="slide">
+   <div class="bar" style="background:#9b6b52"></div>
+   <div class="deco tl">"</div>
+   <div class="meta meta-tl">hikoya</div>
+   <div class="meta meta-tr">@madina.zarif</div>
+   <div class="meta meta-bl">03 / 12</div>
+   <div class="content" style="color:#9b6b52">
+    <div class="eyebrow">Qizil Jiguli</div>
+    <div class="rule"></div>
+    <div class="h1" style="color:#9b6b52;font-size:clamp(34px,5.5vw,82px)">Qizil Jiguli.</div>
+    <div class="body">Mashinada 3 kishi bor edi. Bizga o'xshash yo'lovchilar, deya — o'tirdik.</div>
+   </div>
+  </div>
+
+  <!-- 04 -->
+  <div class="slide">
+   <div class="bar" style="background:#8b3a2a"></div>
+   <div class="deco tl">"</div>
+   <div class="meta meta-tl">hikoya</div>
+   <div class="meta meta-tr">@madina.zarif</div>
+   <div class="meta meta-bl">04 / 12</div>
+   <div class="content" style="color:#8b3a2a">
+    <div class="eyebrow">Burilish nuqtasi</div>
+    <div class="rule"></div>
+    <div class="quote" style="border-color:#8b3a2a">
+     — Biz bilan Navoiga ketasizlar.
+    </div>
+    <div class="caption">oldinda o'tirgan yo'lovchi o'girildi</div>
+    <div class="quote" style="border-color:#8b3a2a">
+     — Aylanib, o'ynab kelasizlar.
+    </div>
+    <div class="caption">haydovchi ko'z qisdi. Orqadagi hiringladi.</div>
+   </div>
+  </div>
+
+  <!-- 05 -->
+  <div class="slide">
+   <div class="bar" style="background:#7a4035"></div>
+   <div class="deco tl">"</div>
+   <div class="meta meta-tl">hikoya</div>
+   <div class="meta meta-tr">@madina.zarif</div>
+   <div class="meta meta-bl">05 / 12</div>
+   <div class="content" style="color:#7a4035">
+    <div class="h1" style="font-size:clamp(26px,4.2vw,62px)">Ichimga qo'rquv o'raladi.</div>
+    <div class="rule"></div>
+    <div class="quote" style="border-color:#7a4035">
+     — Aka, nima deyapsizlar,<br>biz Mirbozorda tushib qolamiz.
+    </div>
+    <div class="caption">yonimdagi ayol titroq ovozda</div>
+   </div>
+  </div>
+
+  <!-- 06 -->
+  <div class="slide">
+   <div class="bar" style="background:#5c6b4a"></div>
+   <div class="deco tl">"</div>
+   <div class="meta meta-tl">hikoya</div>
+   <div class="meta meta-tr">@madina.zarif</div>
+   <div class="meta meta-bl">06 / 12</div>
+   <div class="content" style="color:#5c6b4a">
+    <div class="eyebrow">Tanish ko'chalar</div>
+    <div class="rule"></div>
+    <div class="body italic" style="font-size:clamp(18px,2.8vw,42px)">
+     Dilbarlarni ko'chasi...<br>
+     Arzievlarni uyi...<br>
+     Musiqa maktabi...
+    </div>
+    <div class="h2" style="font-size:clamp(19px,3vw,44px)">5 kmlik yo'l shunaqa uzun bo'lib ketdiki, bitmadi.</div>
+   </div>
+  </div>
+
+  <!-- 07 -->
+  <div class="slide">
+   <div class="bar" style="background:#8b3a2a"></div>
+   <div class="deco tl">"</div>
+   <div class="meta meta-tl">hikoya</div>
+   <div class="meta meta-tr">@madina.zarif</div>
+   <div class="meta meta-bl">07 / 12</div>
+   <div class="content" style="color:#8b3a2a">
+    <div class="body">Ayol yig'lay boshladi. Yig'iga yolvorish qo'shildi.</div>
+    <div class="rule"></div>
+    <div class="quote" style="border-color:#8b3a2a;font-size:clamp(19px,3vw,46px)">
+     — Akalar, rahmingiz kelsin.<br>Unaqa qilmanglar.
+    </div>
+    <div class="caption" style="color:#8b3a2a">Tirjaygan basharalar. Qiqirlagan ovozlar.</div>
+   </div>
+  </div>
+
+  <!-- 08 -->
+  <div class="slide">
+   <div class="bar" style="background:#4a2820"></div>
+   <div class="deco tl">"</div>
+   <div class="meta meta-tl">hikoya</div>
+   <div class="meta meta-tr">@madina.zarif</div>
+   <div class="meta meta-bl">08 / 12</div>
+   <div class="content" style="color:#4a2820">
+    <div class="h1" style="font-size:clamp(24px,4vw,58px)">Tutqichni qattiq siqaman.</div>
+    <div class="rule"></div>
+    <div class="body italic" style="font-size:clamp(18px,2.8vw,40px)">
+     Eshikni ochsam va o'zimni tashlasam —<br>tirik qola olamanmi?
+    </div>
+    <div class="caption">Biroz dalalardan o'tgandan keyin, dedim o'zimga.</div>
+   </div>
+  </div>
+
+  <!-- 09 -->
+  <div class="slide">
+   <div class="bar" style="background:#7a9e7e"></div>
+   <div class="deco tl">"</div>
+   <div class="meta meta-tl">hikoya</div>
+   <div class="meta meta-tr">@madina.zarif</div>
+   <div class="meta meta-bl">09 / 12</div>
+   <div class="content" style="color:#7a9e7e">
+    <div class="eyebrow">Buloq</div>
+    <div class="rule"></div>
+    <div class="body">Chorrahaga yarim km qolganda — bir buloq.</div>
+    <div class="body">Barcha o'tganlar o'sha yerda to'xtardi.</div>
+    <div class="h2" style="color:#7a9e7e">Mashina sekinlasha boshladi.</div>
+   </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="slide">
+   <div class="bar" style="background:#4a7a5e"></div>
+   <div class="deco tl">"</div>
+   <div class="meta meta-tl">hikoya</div>
+   <div class="meta meta-tr">@madina.zarif</div>
+   <div class="meta meta-bl">10 / 12</div>
+   <div class="content" style="color:#4a7a5e">
+    <div class="quote" style="border-color:#4a7a5e">— Suv olib olaylik.</div>
+    <div class="caption">Mashina to'xtadi.</div>
+    <div class="rule"></div>
+    <div class="h1" style="font-size:clamp(23px,3.8vw,56px)">Eshikni ochgancha yerga sakradim</div>
+    <div class="h1" style="color:#4a7a5e;font-size:clamp(24px,4vw,60px)">va bor kuchim bilan yugura boshladim.</div>
+   </div>
+  </div>
+
+  <!-- 11 -->
+  <div class="slide">
+   <div class="bar" style="background:#c23b22"></div>
+   <div class="deco tl">"</div>
+   <div class="meta meta-tl">hikoya</div>
+   <div class="meta meta-tr">@madina.zarif</div>
+   <div class="meta meta-bl">11 / 12</div>
+   <div class="content" style="color:#c23b22">
+    <div class="eyebrow" style="letter-spacing:4px">Qizg'aldoqlar</div>
+    <div class="rule"></div>
+    <div class="h1" style="font-size:clamp(26px,4.2vw,62px)">Qip-qizil qizg'aldoqlar orasida</div>
+    <div class="body italic">tilim tanglayimga yopishguncha yugurdim.</div>
+    <div class="caption">To'xtaganimda — orqamdan u ham yugurardi.</div>
+   </div>
+  </div>
+
+  <!-- 12 -->
+  <div class="slide">
+   <div class="bar" style="background:#b8926a"></div>
+   <div class="deco br">"</div>
+   <div class="meta meta-tl">hikoya</div>
+   <div class="meta meta-tr">@madina.zarif</div>
+   <div class="meta meta-bl">12 / 12</div>
+   <div class="content" style="color:#b8926a">
+    <div class="eyebrow">Bugun</div>
+    <div class="rule"></div>
+    <div class="body">O'sha kuni eson-omon uyga etib oldik.</div>
+    <div class="body italic">Esimdan ham chiqib ketgandi...</div>
+    <div class="h2" style="font-size:clamp(19px,3vw,44px);line-height:1.55">
+     Ammo bugun tezlik bilan yonimdan o'tgan moshina<br>
+     meni bir onda<br>
+     <span style="color:#b8926a;font-style:italic">o'sha qo'rqib qochgan qizchaga</span><br>
+     aylantirdi.
+    </div>
+   </div>
+  </div>
+
+ </div>
+
+ <button class="nav prev-btn" onclick="go(-1)">&#8592;</button>
+ <button class="nav next-btn" onclick="go(1)">&#8594;</button>
+ <div class="dots" id="dots"></div>
 </div>
 
 <script>
@@ -185,7 +321,7 @@ function goTo(n) {
   slides[cur].classList.remove('active');
   slides[cur].classList.add('prev');
   const old = cur;
-  setTimeout(() => slides[old].classList.remove('prev'), 500);
+  setTimeout(() => slides[old].classList.remove('prev'), 520);
   cur = (n + slides.length) % slides.length;
   slides[cur].classList.add('active');
   document.querySelectorAll('.dot').forEach((d, i) =>
@@ -200,9 +336,9 @@ document.addEventListener('keydown', e => {
 });
 
 let sx = 0;
-const w = document.querySelector('.wrapper');
-w.addEventListener('touchstart', e => sx = e.touches[0].clientX, {passive:true});
-w.addEventListener('touchend', e => {
+const wr = document.querySelector('.wrapper');
+wr.addEventListener('touchstart', e => sx = e.touches[0].clientX, {passive:true});
+wr.addEventListener('touchend', e => {
   const dx = sx - e.changedTouches[0].clientX;
   if (Math.abs(dx) > 40) go(dx > 0 ? 1 : -1);
 });
