@@ -24,45 +24,46 @@ body{background:#7dbdbd;display:flex;justify-content:center;align-items:center;
 .slide.active{opacity:1;transform:translateX(0)}
 .slide.prev{opacity:0;transform:translateX(-100%)}
 
-.content{position:relative;z-index:2;width:100%;max-width:84%}
+.content{width:100%;max-width:84%}
 
+/* category label — small, stays separate */
 .eyebrow{
   font-family:system-ui,sans-serif;font-weight:500;
   font-size:clamp(8px,1vw,14px);letter-spacing:4px;
   text-transform:uppercase;color:#2d8888;
-  margin-bottom:clamp(10px,1.6vw,20px);
+  margin-bottom:clamp(12px,1.8vw,24px);
 }
 
+/* vertical black line */
 .vl{
   border-left:clamp(2px,0.3vw,4px) solid #111;
   padding-left:clamp(14px,2.2vw,30px);
+  display:flex;flex-direction:column;
+  gap:clamp(10px,1.6vw,22px);
 }
 
-.h1{font-size:clamp(26px,4.4vw,66px);font-weight:400;line-height:1.25;color:#1a3434;
-  margin-bottom:clamp(6px,1vw,14px)}
-.h2{font-size:clamp(20px,3.2vw,48px);font-weight:400;line-height:1.38;color:#1a3434;
-  margin-bottom:clamp(6px,1vw,14px)}
-.body{font-family:system-ui,sans-serif;font-size:clamp(14px,2vw,30px);
-  font-weight:300;line-height:1.85;color:#2c4848}
-.it{font-style:italic;font-family:Georgia,serif}
-.caption{font-family:system-ui,sans-serif;font-weight:300;font-style:italic;
-  font-size:clamp(10px,1.3vw,19px);color:#4a6464;
-  margin-top:clamp(5px,.8vw,12px)}
+/* single text style for all content */
+.t{
+  font-size:clamp(18px,2.8vw,42px);
+  font-weight:400;
+  line-height:1.65;
+  color:#1a3434;
+}
+.t.it{font-style:italic}
 
+/* white card for dialogue */
 .card{
   background:rgba(255,255,255,.72);
   border-radius:clamp(6px,1.2vw,16px);
   padding:clamp(12px,2vw,28px) clamp(14px,2.2vw,30px);
-  margin-bottom:clamp(6px,1vw,14px);
   width:100%;
 }
-.card-text{font-style:italic;font-size:clamp(15px,2.2vw,34px);
-  line-height:1.6;color:#1a3434}
 
+/* meta — small black */
 .meta{
   position:absolute;bottom:6%;
   font-family:system-ui,sans-serif;font-weight:400;
-  font-size:clamp(8px,.95vw,13px);color:#111;letter-spacing:.8px;z-index:3;
+  font-size:clamp(8px,.95vw,13px);color:#111;letter-spacing:.8px;
 }
 .ml{left:8%}.mr{right:8%}
 
@@ -95,8 +96,8 @@ body{background:#7dbdbd;display:flex;justify-content:center;align-items:center;
    <div class="content">
     <div class="eyebrow">Xotira · hikoya</div>
     <div class="vl">
-     <div class="h1">13–14 yoshdaman.<br>Yoz oylari.</div>
-     <div class="body">Qo'shni tumanda yashaydigan holamnikiga otlandim.</div>
+     <div class="t">13–14 yoshdaman. Yoz oylari.</div>
+     <div class="t">Qo'shni tumanda yashaydigan holamnikiga otlandim.</div>
     </div>
    </div>
    <div class="meta ml">01 / 12</div>
@@ -108,9 +109,8 @@ body{background:#7dbdbd;display:flex;justify-content:center;align-items:center;
    <div class="content">
     <div class="eyebrow">Bekatta</div>
     <div class="vl">
-     <div class="h1">Ikki soat o'tdi.</div>
-     <div class="h2">Avtobusdan darak yo'q.</div>
-     <div class="body">Bekatda yana bir yosh ayol ham kutardi.<br>Oxiri u bilan kelishib mashina to'xtatdik.</div>
+     <div class="t">Ikki soat o'tdi. Avtobusdan darak yo'q.</div>
+     <div class="t">Bekatda yana bir yosh ayol ham kutardi. Oxiri u bilan kelishib mashina to'xtatdik.</div>
     </div>
    </div>
    <div class="meta ml">02 / 12</div>
@@ -122,8 +122,8 @@ body{background:#7dbdbd;display:flex;justify-content:center;align-items:center;
    <div class="content">
     <div class="eyebrow">Qizil Jiguli</div>
     <div class="vl">
-     <div class="h1" style="font-size:clamp(34px,5.4vw,80px)">Qizil Jiguli.</div>
-     <div class="body" style="margin-top:clamp(8px,1.2vw,18px)">Mashinada 3 kishi bor edi.<br>Bizga o'xshash yo'lovchilar, deya — o'tirdik.</div>
+     <div class="t">Qizil Jiguli. Mashinada 3 kishi bor edi.</div>
+     <div class="t">Bizga o'xshash yo'lovchilar, deya — o'tirdik.</div>
     </div>
    </div>
    <div class="meta ml">03 / 12</div>
@@ -134,11 +134,11 @@ body{background:#7dbdbd;display:flex;justify-content:center;align-items:center;
   <div class="slide">
    <div class="content" style="max-width:92%">
     <div class="eyebrow">Burilish nuqtasi</div>
-    <div class="vl" style="display:flex;flex-direction:column;gap:clamp(6px,1vw,14px)">
-     <div class="card"><div class="card-text">— Biz bilan Navoiga ketasizlar.</div></div>
-     <div class="caption" style="margin-top:0">oldinda o'tirgan yo'lovchi o'girildi</div>
-     <div class="card"><div class="card-text">— Aylanib, o'ynab kelasizlar.</div></div>
-     <div class="caption" style="margin-top:0">haydovchi ko'z qisdi. Orqadagi hiringladi.</div>
+    <div class="vl">
+     <div class="card"><div class="t it">— Biz bilan Navoiga ketasizlar.</div></div>
+     <div class="t it">oldinda o'tirgan yo'lovchi o'girildi</div>
+     <div class="card"><div class="t it">— Aylanib, o'ynab kelasizlar.</div></div>
+     <div class="t it">haydovchi ko'z qisdi. Orqadagi hiringladi.</div>
     </div>
    </div>
    <div class="meta ml">04 / 12</div>
@@ -149,12 +149,10 @@ body{background:#7dbdbd;display:flex;justify-content:center;align-items:center;
   <div class="slide">
    <div class="content">
     <div class="eyebrow">Qo'rquv</div>
-    <div class="vl" style="display:flex;flex-direction:column;gap:clamp(8px,1.2vw,16px)">
-     <div class="h1">Ichimga qo'rquv o'raladi.</div>
-     <div class="card">
-      <div class="card-text" style="font-size:clamp(14px,2vw,30px)">— Aka, nima deyapsizlar,<br>biz Mirbozorda tushib qolamiz.</div>
-     </div>
-     <div class="caption" style="margin-top:0">yonimdagi ayol titroq ovozda</div>
+    <div class="vl">
+     <div class="t">Ichimga qo'rquv o'raladi.</div>
+     <div class="card"><div class="t it">— Aka, nima deyapsizlar, biz Mirbozorda tushib qolamiz.</div></div>
+     <div class="t it">yonimdagi ayol titroq ovozda</div>
     </div>
    </div>
    <div class="meta ml">05 / 12</div>
@@ -166,12 +164,8 @@ body{background:#7dbdbd;display:flex;justify-content:center;align-items:center;
    <div class="content">
     <div class="eyebrow">Tanish ko'chalar</div>
     <div class="vl">
-     <div class="h2 it">
-      Dilbarlarni ko'chasi...<br>
-      Arzievlarni uyi...<br>
-      Musiqa maktabi...
-     </div>
-     <div class="body" style="margin-top:clamp(10px,1.5vw,20px)">5 kmlik yo'l shunaqa uzun bo'lib ketdiki, bitmadi.</div>
+     <div class="t it">Dilbarlarni ko'chasi... Arzievlarni uyi... Musiqa maktabi...</div>
+     <div class="t">5 kmlik yo'l shunaqa uzun bo'lib ketdiki, bitmadi.</div>
     </div>
    </div>
    <div class="meta ml">06 / 12</div>
@@ -182,12 +176,10 @@ body{background:#7dbdbd;display:flex;justify-content:center;align-items:center;
   <div class="slide">
    <div class="content" style="max-width:92%">
     <div class="eyebrow">Yolvorish</div>
-    <div class="vl" style="display:flex;flex-direction:column;gap:clamp(8px,1.2vw,16px)">
-     <div class="body">Ayol yig'lay boshladi. Yig'iga yolvorish qo'shildi.</div>
-     <div class="card">
-      <div class="card-text" style="font-size:clamp(16px,2.4vw,36px)">— Akalar, rahmingiz kelsin.<br>Unaqa qilmanglar.</div>
-     </div>
-     <div class="caption" style="margin-top:0;color:#5a3030">Tirjaygan basharalar. Qiqirlagan ovozlar.</div>
+    <div class="vl">
+     <div class="t">Ayol yig'lay boshladi. Yig'iga yolvorish qo'shildi.</div>
+     <div class="card"><div class="t it">— Akalar, rahmingiz kelsin. Unaqa qilmanglar.</div></div>
+     <div class="t it">Tirjaygan basharalar. Qiqirlagan ovozlar.</div>
     </div>
    </div>
    <div class="meta ml">07 / 12</div>
@@ -199,9 +191,9 @@ body{background:#7dbdbd;display:flex;justify-content:center;align-items:center;
    <div class="content">
     <div class="eyebrow">Bir soniya...</div>
     <div class="vl">
-     <div class="h1">Tutqichni qattiq siqaman.</div>
-     <div class="body it" style="margin-top:clamp(8px,1.2vw,16px)">Eshikni ochsam va o'zimni tashlasam —<br>tirik qola olamanmi?</div>
-     <div class="caption">Biroz dalalardan o'tgandan keyin, dedim o'zimga.</div>
+     <div class="t">Tutqichni qattiq siqaman.</div>
+     <div class="t it">Eshikni ochsam va o'zimni tashlasam — tirik qola olamanmi?</div>
+     <div class="t it">Biroz dalalardan o'tgandan keyin, dedim o'zimga.</div>
     </div>
    </div>
    <div class="meta ml">08 / 12</div>
@@ -213,9 +205,8 @@ body{background:#7dbdbd;display:flex;justify-content:center;align-items:center;
    <div class="content">
     <div class="eyebrow">Buloq</div>
     <div class="vl">
-     <div class="body">Chorrahaga yarim km qolganda — bir buloq.</div>
-     <div class="body" style="margin-top:clamp(6px,1vw,12px)">Barcha yo'ldan o'tganlar o'sha yerda to'xtardi.</div>
-     <div class="h2" style="margin-top:clamp(12px,1.8vw,24px)">Mashina sekinlasha boshladi.</div>
+     <div class="t">Chorrahaga yarim km qolganda — bir buloq. Barcha yo'ldan o'tganlar o'sha yerda to'xtardi.</div>
+     <div class="t">Mashina sekinlasha boshladi.</div>
     </div>
    </div>
    <div class="meta ml">09 / 12</div>
@@ -226,11 +217,10 @@ body{background:#7dbdbd;display:flex;justify-content:center;align-items:center;
   <div class="slide">
    <div class="content" style="max-width:92%">
     <div class="eyebrow">Sakradim</div>
-    <div class="vl" style="display:flex;flex-direction:column;gap:clamp(7px,1.1vw,14px)">
-     <div class="card"><div class="card-text">— Suv olib olaylik.</div></div>
-     <div class="caption" style="margin-top:0">Mashina to'xtadi.</div>
-     <div class="h1" style="font-size:clamp(22px,3.8vw,58px)">Eshikni ochgancha yerga sakradim</div>
-     <div class="h2">va bor kuchim bilan yugura boshladim.</div>
+    <div class="vl">
+     <div class="card"><div class="t it">— Suv olib olaylik.</div></div>
+     <div class="t it">Mashina to'xtadi.</div>
+     <div class="t">Eshikni ochgancha yerga sakradim va bor kuchim bilan yugura boshladim.</div>
     </div>
    </div>
    <div class="meta ml">10 / 12</div>
@@ -242,9 +232,8 @@ body{background:#7dbdbd;display:flex;justify-content:center;align-items:center;
    <div class="content">
     <div class="eyebrow">Qizg'aldoqlar</div>
     <div class="vl">
-     <div class="h1">Qip-qizil qizg'aldoqlar orasida</div>
-     <div class="body it" style="margin-top:clamp(8px,1.2vw,16px)">tilim tanglayimga yopishguncha yugurdim.</div>
-     <div class="caption">To'xtaganimda — orqamdan u ham yugurardi.</div>
+     <div class="t">Qip-qizil qizg'aldoqlar orasida tilim tanglayimga yopishguncha yugurdim.</div>
+     <div class="t it">To'xtaganimda — orqamdan u ham yugurardi.</div>
     </div>
    </div>
    <div class="meta ml">11 / 12</div>
@@ -256,14 +245,8 @@ body{background:#7dbdbd;display:flex;justify-content:center;align-items:center;
    <div class="content">
     <div class="eyebrow">Bugun</div>
     <div class="vl">
-     <div class="body">O'sha kuni eson-omon uyga etib oldik.</div>
-     <div class="body it" style="margin-top:clamp(6px,1vw,12px)">Esimdan ham chiqib ketgandi...</div>
-     <div class="h2" style="margin-top:clamp(12px,1.8vw,24px);font-size:clamp(18px,2.9vw,44px);line-height:1.55">
-      Ammo bugun tezlik bilan yonimdan o'tgan moshina<br>
-      meni bir onda<br>
-      <em style="color:#2a7070">o'sha qo'rqib qochgan qizchaga</em><br>
-      aylantirdi.
-     </div>
+     <div class="t">O'sha kuni eson-omon uyga etib oldik. Esimdan ham chiqib ketgandi...</div>
+     <div class="t">Ammo bugun tezlik bilan yonimdan o'tgan moshina meni bir onda o'sha qo'rqib qochgan qizchaga aylantirdi.</div>
     </div>
    </div>
    <div class="meta ml">12 / 12</div>
