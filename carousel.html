@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>@madina.zarif</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#7dbdbd;display:flex;justify-content:center;align-items:center;
+  min-height:100vh;font-family:Georgia,'Times New Roman',serif;user-select:none}
+
+.wrapper{position:relative;width:min(96vw,96vh);max-width:1080px;aspect-ratio:1/1}
+.slides{width:100%;height:100%;overflow:hidden;position:relative}
+
+.slide{
+  position:absolute;inset:0;
+  background:#bce0df;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:10% 11% 13%;
+  opacity:0;transform:translateX(100%);
+  transition:transform .5s cubic-bezier(.77,0,.18,1),opacity .5s ease;
+  overflow:hidden;
+}
+.slide.active{opacity:1;transform:translateX(0)}
+.slide.prev{opacity:0;transform:translateX(-100%)}
+
+.content{width:100%;max-width:84%}
+
+/* category label — small, stays separate */
+.eyebrow{
+  font-family:system-ui,sans-serif;font-weight:500;
+  font-size:clamp(8px,1vw,14px);letter-spacing:4px;
+  text-transform:uppercase;color:#2d8888;
+  margin-bottom:clamp(12px,1.8vw,24px);
+}
+
+/* vertical black line */
+.vl{
+  border-left:clamp(2px,0.3vw,4px) solid #111;
+  padding-left:clamp(14px,2.2vw,30px);
+  display:flex;flex-direction:column;
+  gap:clamp(10px,1.6vw,22px);
+}
+
+/* single text style for all content */
+.t{
+  font-size:clamp(13px,1.9vw,28px);
+  font-weight:400;
+  line-height:1.65;
+  color:#1a3434;
+}
+.t.it{font-style:italic}
+
+/* dialogue card — slightly darker teal, no white */
+.card{
+  background:rgba(0,0,0,.1);
+  border-radius:clamp(6px,1.2vw,16px);
+  padding:clamp(10px,1.6vw,22px) clamp(12px,1.8vw,26px);
+  width:100%;
+}
+
+/* meta — small black */
+.meta{
+  position:absolute;bottom:6%;
+  font-family:system-ui,sans-serif;font-weight:400;
+  font-size:clamp(8px,.95vw,13px);color:#111;letter-spacing:.8px;
+}
+.ml{left:8%}.mr{right:8%}
+
+.nav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  background:rgba(255,255,255,.3);border:1px solid rgba(255,255,255,.5);
+  color:#1a3434;border-radius:50%;cursor:pointer;
+  width:clamp(28px,3.6vw,52px);height:clamp(28px,3.6vw,52px);
+  font-size:clamp(12px,1.7vw,22px);
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s;z-index:10;
+}
+.nav:hover{background:rgba(255,255,255,.55)}
+.prev-btn{left:clamp(-40px,-4.5vw,-24px)}
+.next-btn{right:clamp(-40px,-4.5vw,-24px)}
+
+.dots{position:absolute;bottom:-26px;left:50%;transform:translateX(-50%);
+  display:flex;gap:6px;z-index:10}
+.dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.35);
+  cursor:pointer;transition:all .2s}
+.dot.active{background:#fff;transform:scale(1.45)}
+</style>
+</head>
+<body>
+<div class="wrapper">
+ <div class="slides" id="slides">
+
+  <!-- 01 -->
+  <div class="slide active">
+   <div class="content">
+    <div class="vl">
+     <div class="t">Bugun bir mashina yonimdan o'tayotganda qo'rqitdi.</div>
+     <div class="t">Bu qo'rquv meni uzoq yillar avval bo'lib o'tgan voqeaga olib ketdi.</div>
+    </div>
+   </div>
+   <div class="meta ml">01 / 19</div>
+   <div class="meta mr">@madina.zarif</div>
+  </div>
+
+  <!-- 02 -->
+  <div class="slide">
+   <div class="content">
+    <div class="vl">
+     <div class="t">13-14 yoshdaman. You oylari. Qo'shni tumanda yashaydigan holamnikiga otlandim.</div>
+    </div>
+   </div>
+   <div class="meta ml">02 / 19</div>
+   <div class="meta mr">@madina.zarif</div>
+  </div>
+
+  <!-- 03 -->
+  <div class="slide">
+   <div class="content">
+    <div class="vl">
+     <div class="t">U paytlar avtobuslar kam bo'lar, bori ham to'lib toshib o'tardi. İkki soat o'tdi ham avtobusdan darak bo'lmadi.</div>
+    </div>
+   </div>
+   <div class="meta ml">03 / 19</div>
+   <div class="meta mr">@madina.zarif</div>
+  </div>
+
+  <!-- 04 -->
+  <div class="slide">
+   <div class="content">
+    <div class="vl">
+     <div class="t">Bekatda yana bir yoshroq bir ayol ham avtobus kutardi. Oxiri u bilan kelishib mashina to'xtatdik.</div>
+    </div>
+   </div>
+   <div class="meta ml">04 / 19</div>
+   <div class="meta mr">@madina.zarif</div>
+  </div>
+
+  <!-- 05 -->
+  <div class="slide">
+   <div class="content">
+    <div class="vl">
+     <div class="t">Qizil jiguli. Mashinada 3 kishi bor edi. Bizga o'xshash yo'lovchi deya mashinaga o'tirdik.</div>
+    </div>
+   </div>
+   <div class="meta ml">05 / 19</div>
+   <div class="meta mr">@madina.zarif</div>
+  </div>
+
+  <!-- 06 -->
+  <div class="slide">
+   <div class="content">
+    <div class="vl">
+     <div class="t">Biroz yo'l olgach oldinda o'tirgan yo'lovchi bizga o'girildiyu:</div>
+     <div class="card"><div class="t it">- Biz bilan Navoiga ketasizlar, dedi.</div></div>
+     <div class="t">Tushunmay bir yonimdagi ayolga, bir o kishiga qaradim.</div>
+    </div>
+   </div>
+   <div class="meta ml">06 / 19</div>
+   <div class="meta mr">@madina.zarif</div>
+  </div>
+
+  <!-- 07 -->
+  <div class="slide">
+   <div class="content">
+    <div class="vl">
+     <div class="card"><div class="t it">- Nima qilibdi, aylanib, o'ynab kelasizlar, dedi bu saflar haydovchi ko'z qisib.</div></div>
+     <div class="t">Orqada o'tirgan hiringladi.</div>
+     <div class="t">İchimga qo'rquv o'raladi.</div>
+    </div>
+   </div>
+   <div class="meta ml">07 / 19</div>
+   <div class="meta mr">@madina.zarif</div>
+  </div>
+
+  <!-- 08 -->
+  <div class="slide">
+   <div class="content">
+    <div class="vl">
+     <div class="t">Ularga diqqatliroq qaradim. Rasmiy kiyimda, ko'rinishidan lavozim egasiga o'xshatdim. Yonimdagi ayol: aka, nima deyapsizlar, biz Mirbozorda tushib qolamiz, dedi.</div>
+    </div>
+   </div>
+   <div class="meta ml">08 / 19</div>
+   <div class="meta mr">@madina.zarif</div>
+  </div>
+
+  <!-- 09 -->
+  <div class="slide">
+   <div class="content">
+    <div class="vl">
+     <div class="t">Yana namalardir deyishdi, ikki ko'zim o'tib boryotgan yo'llarda.</div>
+    </div>
+   </div>
+   <div class="meta ml">09 / 19</div>
+   <div class="meta mr">@madina.zarif</div>
+  </div>
+
+  <!-- 10 -->
+  <div class="slide">
+   <div class="content">
+    <div class="vl">
+     <div class="t it">Dilbarlarni ko'chasi, Arzievlarni uyi, Musiqa maktabi...</div>
+     <div class="t">5 kmlik yo'l shunaqa uzun bo'lib ketdiki, qaniki bitsa.</div>
+    </div>
+   </div>
+   <div class="meta ml">10 / 19</div>
+   <div class="meta mr">@madina.zarif</div>
+  </div>
+
+  <!-- 11 -->
+  <div class="slide">
+   <div class="content">
+    <div class="vl">
+     <div class="t">Ayol yig'lay boshladi. Yig'iga yolvorish ham qo'shildi.</div>
+     <div class="card"><div class="t it">- Akalar, rahmingiz kelsin. Unaqa qilmanglar.</div></div>
+     <div class="t it">Tirjaygan basharalar... qiqirlagan ovozlar...</div>
+    </div>
+   </div>
+   <div class="meta ml">11 / 19</div>
+   <div class="meta mr">@madina.zarif</div>
+  </div>
+
+  <!-- 12 -->
+  <div class="slide">
+   <div class="content">
+    <div class="vl">
+     <div class="t">Tutqichni qattiq siqaman. Eshikni ochsam va o'zimni tashlasam tirik qola olamanmi?</div>
+     <div class="t">Biroz dalalardan o'tgandan keyin, dedim o'zimga o'zim.</div>
+    </div>
+   </div>
+   <div class="meta ml">12 / 19</div>
+   <div class="meta mr">@madina.zarif</div>
+  </div>
+
+  <!-- 13 -->
+  <div class="slide">
+   <div class="content">
+    <div class="vl">
+     <div class="t">Chorrahaga yarim km qolganda bir buloq bor.</div>
+     <div class="t">Barcha yoldan o'tganlar bu buloqdan suv ichishni yoki suv to'ldirib olish uchun to'htashardi.</div>
+    </div>
+   </div>
+   <div class="meta ml">13 / 19</div>
+   <div class="meta mr">@madina.zarif</div>
+  </div>
+
+  <!-- 14 -->
+  <div class="slide">
+   <div class="content">
+    <div class="vl">
+     <div class="t">Mashina o'sha yerga yaqin sekinlasha boshladi. Tutqichni tutdim va ochishga tayorlandim.</div>
+     <div class="card"><div class="t it">- Suv olib olaylik, - dedi haydovchi va mashina to'xtadi.</div></div>
+    </div>
+   </div>
+   <div class="meta ml">14 / 19</div>
+   <div class="meta mr">@madina.zarif</div>
+  </div>
+
+  <!-- 15 -->
+  <div class="slide">
+   <div class="content">
+    <div class="vl">
+     <div class="t">Eshikni ochgancha yerga sakradim va bor kuchim bilan yugura boshladim.</div>
+     <div class="t it">- Orqamdan yetib olishsachi? - degan vahima keldi.</div>
+    </div>
+   </div>
+   <div class="meta ml">15 / 19</div>
+   <div class="meta mr">@madina.zarif</div>
+  </div>
+
+  <!-- 16 -->
+  <div class="slide">
+   <div class="content">
+    <div class="vl">
+     <div class="t">Katta yol bo'lishiga qaramay yolni narigi tomoniga o'zimni otdim. Dala tomonga qarab yugurdum.</div>
+    </div>
+   </div>
+   <div class="meta ml">16 / 19</div>
+   <div class="meta mr">@madina.zarif</div>
+  </div>
+
+  <!-- 17 -->
+  <div class="slide">
+   <div class="content">
+    <div class="vl">
+     <div class="t">Qip qizil qizgaldoqlar orasida tilim tanglayimga yopishguncha yugurdum.</div>
+     <div class="t">To'xtaganimda orqamdan xuddi men kabi yugurayotgan haligi ayolni ko'rdim.</div>
+     <div class="t">U ham qochib ulgurgandi.</div>
+    </div>
+   </div>
+   <div class="meta ml">17 / 19</div>
+   <div class="meta mr">@madina.zarif</div>
+  </div>
+
+  <!-- 18 -->
+  <div class="slide">
+   <div class="content">
+    <div class="vl">
+     <div class="t">O'sha kuni ikimiz ham eson omon uyga etib oldik. Bu voqea esimdan ham chiqib ketgandi.</div>
+    </div>
+   </div>
+   <div class="meta ml">18 / 19</div>
+   <div class="meta mr">@madina.zarif</div>
+  </div>
+
+  <!-- 19 -->
+  <div class="slide">
+   <div class="content">
+    <div class="vl">
+     <div class="t">Bugun tezlik bilan yonimdan o'tgan moshina meni bir onda o'sha qorqib qochgan qizchaga aylantirdi qo'ydi.</div>
+    </div>
+   </div>
+   <div class="meta ml">19 / 19</div>
+   <div class="meta mr">@madina.zarif</div>
+  </div>
+
+ </div>
+
+ <button class="nav prev-btn" onclick="go(-1)">&#8592;</button>
+ <button class="nav next-btn" onclick="go(1)">&#8594;</button>
+ <div class="dots" id="dots"></div>
+</div>
+
+<script>
+let cur = 0;
+const slides = document.querySelectorAll('.slide');
+const dotsEl = document.getElementById('dots');
+
+slides.forEach((_, i) => {
+  const d = document.createElement('div');
+  d.className = 'dot' + (i === 0 ? ' active' : '');
+  d.onclick = () => goTo(i);
+  dotsEl.appendChild(d);
+});
+
+function goTo(n) {
+  slides[cur].classList.remove('active');
+  slides[cur].classList.add('prev');
+  const old = cur;
+  setTimeout(() => slides[old].classList.remove('prev'), 520);
+  cur = (n + slides.length) % slides.length;
+  slides[cur].classList.add('active');
+  document.querySelectorAll('.dot').forEach((d, i) =>
+    d.className = 'dot' + (i === cur ? ' active' : ''));
+}
+
+function go(d) { goTo(cur + d); }
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft') go(-1);
+  if (e.key === 'ArrowRight') go(1);
+});
+
+let sx = 0;
+const wr = document.querySelector('.wrapper');
+wr.addEventListener('touchstart', e => sx = e.touches[0].clientX, {passive:true});
+wr.addEventListener('touchend', e => {
+  const dx = sx - e.changedTouches[0].clientX;
+  if (Math.abs(dx) > 40) go(dx > 0 ? 1 : -1);
+});
+</script>
+</body>
+</html>
