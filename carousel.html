@@ -24,16 +24,6 @@ body{background:#7dbdbd;display:flex;justify-content:center;align-items:center;
 .slide.active{opacity:1;transform:translateX(0)}
 .slide.prev{opacity:0;transform:translateX(-100%)}
 
-/* blob shapes */
-.b{position:absolute;pointer-events:none;border-radius:50%}
-
-/* sparkles */
-.sp{position:absolute;pointer-events:none;color:#fff;
-  font-style:normal;font-family:system-ui;opacity:.75}
-.sp-lg{font-size:clamp(16px,2.4vw,34px)}
-.sp-sm{font-size:clamp(9px,1.2vw,18px);opacity:.45}
-
-/* content */
 .content{position:relative;z-index:2;width:100%;max-width:84%}
 
 .eyebrow{
@@ -43,7 +33,6 @@ body{background:#7dbdbd;display:flex;justify-content:center;align-items:center;
   margin-bottom:clamp(10px,1.6vw,20px);
 }
 
-/* vertical black line */
 .vl{
   border-left:clamp(2px,0.3vw,4px) solid #111;
   padding-left:clamp(14px,2.2vw,30px);
@@ -60,7 +49,6 @@ body{background:#7dbdbd;display:flex;justify-content:center;align-items:center;
   font-size:clamp(10px,1.3vw,19px);color:#4a6464;
   margin-top:clamp(5px,.8vw,12px)}
 
-/* white card for dialogue */
 .card{
   background:rgba(255,255,255,.72);
   border-radius:clamp(6px,1.2vw,16px);
@@ -71,7 +59,6 @@ body{background:#7dbdbd;display:flex;justify-content:center;align-items:center;
 .card-text{font-style:italic;font-size:clamp(15px,2.2vw,34px);
   line-height:1.6;color:#1a3434}
 
-/* meta — small black */
 .meta{
   position:absolute;bottom:6%;
   font-family:system-ui,sans-serif;font-weight:400;
@@ -79,7 +66,6 @@ body{background:#7dbdbd;display:flex;justify-content:center;align-items:center;
 }
 .ml{left:8%}.mr{right:8%}
 
-/* nav */
 .nav{
   position:absolute;top:50%;transform:translateY(-50%);
   background:rgba(255,255,255,.3);border:1px solid rgba(255,255,255,.5);
@@ -106,11 +92,6 @@ body{background:#7dbdbd;display:flex;justify-content:center;align-items:center;
 
   <!-- 01 -->
   <div class="slide active">
-   <div class="b" style="width:44%;height:44%;background:rgba(255,255,255,.2);top:-8%;right:-6%"></div>
-   <div class="b" style="width:20%;height:20%;background:rgba(255,255,255,.15);bottom:14%;right:10%"></div>
-   <i class="sp sp-lg" style="top:7%;right:8%">✦</i>
-   <i class="sp sp-sm" style="bottom:15%;right:16%">✦</i>
-   <i class="sp sp-sm" style="top:15%;left:8%">✦</i>
    <div class="content">
     <div class="eyebrow">Xotira · hikoya</div>
     <div class="vl">
@@ -124,10 +105,6 @@ body{background:#7dbdbd;display:flex;justify-content:center;align-items:center;
 
   <!-- 02 -->
   <div class="slide">
-   <div class="b" style="width:52%;height:52%;background:rgba(255,255,255,.17);bottom:-14%;left:-10%"></div>
-   <div class="b" style="width:18%;height:18%;background:rgba(255,255,255,.18);top:8%;right:12%"></div>
-   <i class="sp sp-lg" style="top:7%;right:8%">✦</i>
-   <i class="sp sp-sm" style="bottom:15%;left:14%">✦</i>
    <div class="content">
     <div class="eyebrow">Bekatta</div>
     <div class="vl">
@@ -142,11 +119,6 @@ body{background:#7dbdbd;display:flex;justify-content:center;align-items:center;
 
   <!-- 03 -->
   <div class="slide">
-   <div class="b" style="width:40%;height:40%;background:rgba(255,255,255,.2);top:-6%;right:-4%"></div>
-   <div class="b" style="width:24%;height:24%;background:rgba(255,255,255,.14);bottom:11%;left:5%"></div>
-   <i class="sp sp-lg" style="top:8%;right:9%">✦</i>
-   <i class="sp sp-sm" style="top:12%;left:9%">✦</i>
-   <i class="sp sp-sm" style="bottom:14%;right:11%">✦</i>
    <div class="content">
     <div class="eyebrow">Qizil Jiguli</div>
     <div class="vl">
@@ -160,9 +132,6 @@ body{background:#7dbdbd;display:flex;justify-content:center;align-items:center;
 
   <!-- 04 -->
   <div class="slide">
-   <div class="b" style="width:46%;height:46%;background:rgba(255,255,255,.17);bottom:-10%;right:-8%"></div>
-   <i class="sp sp-lg" style="top:7%;right:8%">✦</i>
-   <i class="sp sp-sm" style="bottom:14%;left:9%">✦</i>
    <div class="content" style="max-width:92%">
     <div class="eyebrow">Burilish nuqtasi</div>
     <div class="vl" style="display:flex;flex-direction:column;gap:clamp(6px,1vw,14px)">
@@ -178,10 +147,6 @@ body{background:#7dbdbd;display:flex;justify-content:center;align-items:center;
 
   <!-- 05 -->
   <div class="slide">
-   <div class="b" style="width:36%;height:36%;background:rgba(255,255,255,.2);top:-5%;left:-5%"></div>
-   <div class="b" style="width:20%;height:20%;background:rgba(255,255,255,.14);bottom:12%;right:9%"></div>
-   <i class="sp sp-lg" style="top:8%;right:9%">✦</i>
-   <i class="sp sp-sm" style="bottom:14%;left:13%">✦</i>
    <div class="content">
     <div class="eyebrow">Qo'rquv</div>
     <div class="vl" style="display:flex;flex-direction:column;gap:clamp(8px,1.2vw,16px)">
@@ -198,10 +163,6 @@ body{background:#7dbdbd;display:flex;justify-content:center;align-items:center;
 
   <!-- 06 -->
   <div class="slide">
-   <div class="b" style="width:48%;height:48%;background:rgba(255,255,255,.17);top:-10%;right:-8%"></div>
-   <i class="sp sp-lg" style="top:7%;right:9%">✦</i>
-   <i class="sp sp-sm" style="top:10%;left:9%">✦</i>
-   <i class="sp sp-sm" style="bottom:14%;right:12%">✦</i>
    <div class="content">
     <div class="eyebrow">Tanish ko'chalar</div>
     <div class="vl">
@@ -219,9 +180,6 @@ body{background:#7dbdbd;display:flex;justify-content:center;align-items:center;
 
   <!-- 07 -->
   <div class="slide">
-   <div class="b" style="width:42%;height:42%;background:rgba(255,255,255,.17);bottom:-8%;left:-6%"></div>
-   <i class="sp sp-lg" style="top:7%;right:8%">✦</i>
-   <i class="sp sp-sm" style="bottom:13%;right:10%">✦</i>
    <div class="content" style="max-width:92%">
     <div class="eyebrow">Yolvorish</div>
     <div class="vl" style="display:flex;flex-direction:column;gap:clamp(8px,1.2vw,16px)">
@@ -238,10 +196,6 @@ body{background:#7dbdbd;display:flex;justify-content:center;align-items:center;
 
   <!-- 08 -->
   <div class="slide">
-   <div class="b" style="width:36%;height:36%;background:rgba(255,255,255,.17);top:-4%;right:-4%"></div>
-   <div class="b" style="width:26%;height:26%;background:rgba(255,255,255,.12);bottom:9%;left:4%"></div>
-   <i class="sp sp-lg" style="top:8%;right:9%">✦</i>
-   <i class="sp sp-sm" style="bottom:15%;left:11%">✦</i>
    <div class="content">
     <div class="eyebrow">Bir soniya...</div>
     <div class="vl">
@@ -256,10 +210,6 @@ body{background:#7dbdbd;display:flex;justify-content:center;align-items:center;
 
   <!-- 09 -->
   <div class="slide">
-   <div class="b" style="width:50%;height:50%;background:rgba(255,255,255,.19);bottom:-12%;right:-10%"></div>
-   <i class="sp sp-lg" style="top:7%;right:8%">✦</i>
-   <i class="sp sp-sm" style="top:10%;left:9%">✦</i>
-   <i class="sp sp-sm" style="bottom:15%;left:13%">✦</i>
    <div class="content">
     <div class="eyebrow">Buloq</div>
     <div class="vl">
@@ -274,9 +224,6 @@ body{background:#7dbdbd;display:flex;justify-content:center;align-items:center;
 
   <!-- 10 -->
   <div class="slide">
-   <div class="b" style="width:38%;height:38%;background:rgba(255,255,255,.18);top:-5%;left:-6%"></div>
-   <i class="sp sp-lg" style="top:7%;right:8%">✦</i>
-   <i class="sp sp-sm" style="bottom:13%;right:10%">✦</i>
    <div class="content" style="max-width:92%">
     <div class="eyebrow">Sakradim</div>
     <div class="vl" style="display:flex;flex-direction:column;gap:clamp(7px,1.1vw,14px)">
@@ -292,11 +239,6 @@ body{background:#7dbdbd;display:flex;justify-content:center;align-items:center;
 
   <!-- 11 -->
   <div class="slide">
-   <div class="b" style="width:44%;height:44%;background:rgba(255,255,255,.19);top:-7%;right:-6%"></div>
-   <div class="b" style="width:20%;height:20%;background:rgba(255,255,255,.14);bottom:11%;left:6%"></div>
-   <i class="sp sp-lg" style="top:7%;right:9%">✦</i>
-   <i class="sp sp-sm" style="top:10%;left:8%">✦</i>
-   <i class="sp sp-sm" style="bottom:14%;right:11%">✦</i>
    <div class="content">
     <div class="eyebrow">Qizg'aldoqlar</div>
     <div class="vl">
@@ -311,9 +253,6 @@ body{background:#7dbdbd;display:flex;justify-content:center;align-items:center;
 
   <!-- 12 -->
   <div class="slide">
-   <div class="b" style="width:52%;height:52%;background:rgba(255,255,255,.18);bottom:-13%;left:-10%"></div>
-   <i class="sp sp-lg" style="top:7%;right:8%">✦</i>
-   <i class="sp sp-sm" style="bottom:13%;right:10%">✦</i>
    <div class="content">
     <div class="eyebrow">Bugun</div>
     <div class="vl">
